@@ -1,0 +1,6 @@
+Goat,4,450
+Sheep,18,500
+Donky,5,325
+Llama,5,950
+Cow,5,1250
+Pig,7,700

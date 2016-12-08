@@ -1,0 +1,2 @@
+Customer Name,email,password,Address,Postal Code, City, Province, Country -- TEST DATA ONLY
+Ben Covey,benvcovey@gmail.com,password,20 Fox Hollow Drive, B3Z1E5, Upper Tantallon, Nova Scotia, Canada

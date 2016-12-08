@@ -15,15 +15,15 @@
 <title>Purchase</title>
 <script>
 function setPic(animal){
-	if(animal == "goat"){
+	if(animal.equals("Goat")){
 		document.getElementById("placeholder").src="https://66.media.tumblr.com/c3bf8a266f2af35dbc6537a3a9ec516a/tumblr_npg8duhVDH1r7yxrco1_500.jpg";	
-	}else if(animal == "donkey"){
+	}else if(animal.equals("Donkey")){
 		document.getElementById("placeholder").src="https://pbs.twimg.com/profile_images/2722910442/5faa5dc5075ff54e14705d8483104f90.jpeg";	
-	}else if(animal == "cow"){
+	}else if(animal.equals("Cow")){
 		document.getElementById("placeholder").src="http://cdn.analyteguru.com/uploads/2015/03/goofy-cow1.jpg";	
-	}else if(animal == "llama"){
+	}else if(animal.equals("Llama")){
 		document.getElementById("placeholder").src="https://pgcpsmess.files.wordpress.com/2014/04/artworks-000056755264-z8hm7l-t500x500.jpg?w=510";	
-	}else if(animal == "pig"){
+	}else if(animal.equals("Pig")){
 		document.getElementById("placeholder").src="https://pbs.twimg.com/profile_images/3502642221/6284f02123933665e8d149b599a0e823.jpeg";	
 	}
 }
@@ -41,7 +41,7 @@ function setPic(animal){
 	        </button>
 	        <a class="navbar-brand" href="/FINAL/list.jsp">Farm Animal Web Store</a>
 	      </div>
-        <div id="navbar" class="navbar-collapse collapse">
+        <div id="navbar" class="">
           <form action = "/FINAL/list.jsp" class="navbar-form navbar-right">
             <button type="submit" class="btn btn-success">Sign out</button>
           </form>
@@ -51,38 +51,42 @@ function setPic(animal){
 	  </nav>
     <div class = "container ">
     	<div class = "col-md-4" >
-    		<div class = "row">
+    		<div class = "row"><br><br><br><h3></h3><br>
+    			<h1>Purchase Page</h1>
     			<img id="placeholder" src="http://placehold.it/500x500">	
 			</div>
 			
-			<% 
+			<%
 				String Description = "";	
-				if(request.getParameter("Animal").toString() == "goat"){
+				if(request.getParameter("Animal").equals("Goat")){
 					Description = "A good old beautiful goat";
-				}else if(request.getParameter("Animal").toString() == "donkey"){
+				}else if(request.getParameter("Animal").equals("Donkey")){
 					Description = "A good old beautiful donkey";
-				}else if(request.getParameter("Animal").toString() == "cow"){
+				}else if(request.getParameter("Animal").equals("Cow")){
 					Description = "A good old beautiful cow";
-				}else if(request.getParameter("Animal").toString() == "llama"){
+				}else if(request.getParameter("Animal").equals("Llama")){
 					Description = "A good old beautiful llama";
-				}else if(request.getParameter("Animal").toString() == "pig"){
+				}else if(request.getParameter("Animal").equals("Pig")){
 					Description = "A good old beautiful pig";
 				}				
 				pageContext.setAttribute("desc", Description);
 			%>
-			
-			<h1><%request.getParameter("Animal").toString(); %></h1>
+			<h1><%=request.getParameter("Animal")%></h1>
+			<p>Price $<%=request.getParameter("Price")%></p>
+			<%if(request.getParameter("Stock").equals("0")){%>
+			<h2>OUT OF STOCK.</h2>
+			<%}else{ %>
 			<p>${desc}</p>
 			<form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" >
 			<input type="hidden" name="cmd" value="_cart">
 			<input type="hidden" name="business" value="brandonchristen@hotmail.ca">
 			<input type="hidden" name="lc" value="BM">
-			<input type="hidden" name="item_name" value="figure ot how to get animal name here">
+			<input type="hidden" name="item_name" value="<%=request.getParameter("Animal")%>">
 			<input type="hidden" name="item_number" value="01">
-			<input type="hidden" name="amount" value="25.00">
+			<input type="hidden" name="amount" value="<%= request.getParameter("Price") %>">
 			<input type="hidden" name="currency_code" value="CAD">
 			<input type="hidden" name="button_subtype" value="products">
-			<input type="hidden" name="no_note" value="0">
+			<input type="hidden" name="no_note" value="No Returns">
 			<input type="hidden" name="tax_rate" value="15.000">
 			<input type="hidden" name="shipping" value="5.00">
 			<input type="hidden" name="add" value="1">
@@ -90,7 +94,8 @@ function setPic(animal){
 			<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_cart_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 			<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 			</form>
-			<form action = "/FINAL/list.jsp" >
+			<%} %>
+			<form action = "/FINAL/list" >
             <button type="submit" class="btn btn-success">Back</button>
           </form>
 	</div>
